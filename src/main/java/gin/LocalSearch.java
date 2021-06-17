@@ -54,7 +54,7 @@ public class LocalSearch {
     protected String testClassName;
 
     @Argument(alias = "ts", description = "Transplant source")
-    protected String transplantSourceName;
+    protected String donorClassName;
     
     @Argument(alias = "et", description = "Edit type: this can be a member of the EditType enum (LINE,STATEMENT,MATCHED_STATEMENT,MODIFY_STATEMENT); the fully qualified name of a class that extends gin.edit.Edit, or a comma separated list of both")
     protected String editType = EditType.LINE.toString();
@@ -68,7 +68,7 @@ public class LocalSearch {
     protected Boolean failFast = false;
 
     protected SourceFile sourceFile;
-    protected SourceFile transplantSourceFile;
+    protected SourceFile donorFile;
     InternalTestRunner testRunner;
     protected Random rng;
 
@@ -99,15 +99,15 @@ public class LocalSearch {
         if (this.testClassName == null) {
             this.testClassName = this.className + "Test";
         }
-        if (this.transplantSourceName == null) {
-            this.transplantSourceName = this.className + "Transplant";
+        if (this.donorClassName == null) {
+            this.donorClassName = this.className + "Transplant";
         }
 
-        File file = new File(this.transplantSourceName);
-        System.out.println(this.transplantSourceName);
+        File file = new File(this.donorClassName);
+        System.out.println(this.donorClassName);
         if(file.exists() && !file.isDirectory() && file.canRead())
         {
-            this.transplantSourceFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.transplantSourceName, null);
+            this.donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.donorClassName, null);
         }
 
         this.testRunner = new InternalTestRunner(className, classPath, testClassName, failFast);
