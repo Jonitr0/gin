@@ -137,7 +137,7 @@ public class PatchAnalyser {
 
         // Evaluate original class
         Logger.info("Timing original class execution...");
-        Patch emptyPatch = new Patch(sourceFileTree);
+        Patch emptyPatch = new Patch(sourceFileTree, null);
         long originalExecutionTime = testRunner.runTests(emptyPatch, REPS).totalExecutionTime();
         Logger.info("Original execution time: " + originalExecutionTime);
 
@@ -174,7 +174,7 @@ public class PatchAnalyser {
 
         if (patchText.equals("|")) {
             Logger.info("No edits to be applied. Running original code.");
-            Patch patch = new Patch(sourceFileTree);
+            Patch patch = new Patch(sourceFileTree, null);
             return patch;
         }
 
@@ -241,7 +241,7 @@ public class PatchAnalyser {
             System.exit(-1);
         }
         
-        Patch patch = new Patch(allLineEdits ? sourceFileLine : sourceFileTree);
+        Patch patch = new Patch(allLineEdits ? sourceFileLine : sourceFileTree, null);
         for (Edit e : editInstances) {
             patch.add(e);
         }

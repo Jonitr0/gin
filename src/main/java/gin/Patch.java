@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import gin.edit.transplant.TransplantEdit;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
@@ -25,6 +26,7 @@ public class Patch {
 
     protected LinkedList<Edit> edits = new LinkedList<>();
     protected SourceFile sourceFile;
+    protected SourceFile donorFile;
     private Class<?> superClassOfEdits;
     
     // we need both of the following:
@@ -42,7 +44,7 @@ public class Patch {
      */
     List<Boolean> editsValidOnLastApply; 
 
-    public Patch(SourceFile sourceFile) {
+    public Patch(SourceFile sourceFile, SourceFile donorFile) {
         this.sourceFile = sourceFile;
         this.superClassOfEdits = null;
         this.lastApplyWasValid = false;
@@ -51,7 +53,7 @@ public class Patch {
 
     @SuppressWarnings("unchecked")
     public Patch clone() {
-        Patch clonePatch = new Patch(this.sourceFile);
+        Patch clonePatch = new Patch(this.sourceFile, this.donorFile);
         clonePatch.edits = (LinkedList<Edit>)(this.edits.clone());
         clonePatch.superClassOfEdits = this.superClassOfEdits;
         return clonePatch;
@@ -83,6 +85,12 @@ public class Patch {
         if ( (edit.getClass().toString()).equals(NoEdit.class.toString()) ) {
             // do not add an empty Edit
         } else {
+            //set donor file if the edit implements TransplantEdit interface
+            if(edit instanceof TransplantEdit)
+            {
+                ((TransplantEdit) edit).setDonor(this.donorFile);
+            }
+
             if ((superClassOfEdits == null) || superClassOfEdits.isAssignableFrom(edit.getClass())) {
                 this.edits.add(edit);
                 

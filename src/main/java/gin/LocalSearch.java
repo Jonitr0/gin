@@ -100,7 +100,7 @@ public class LocalSearch {
             this.testClassName = this.className + "Test";
         }
         if (this.donorClassName == null) {
-            this.donorClassName = this.className + "Transplant";
+            this.donorClassName = this.className + "Donor";
         }
 
         File file = new File(this.donorClassName);
@@ -117,7 +117,7 @@ public class LocalSearch {
     // Apply empty patch and return execution time
     private long timeOriginalCode() {
 
-        Patch emptyPatch = new Patch(this.sourceFile);
+        Patch emptyPatch = new Patch(this.sourceFile, this.donorFile);
         UnitTestResultSet resultSet = testRunner.runTests(emptyPatch, WARMUP_REPS);
 
         if (!resultSet.allTestsSuccessful()) {
@@ -154,7 +154,7 @@ public class LocalSearch {
         Logger.info("Original execution time: " + origTime + "ns");
 
         // Start with empty patch
-        Patch bestPatch = new Patch(this.sourceFile);
+        Patch bestPatch = new Patch(this.sourceFile, this.donorFile);
         long bestTime = origTime;
 
         for (int step = 1; step <= numSteps; step++) {
