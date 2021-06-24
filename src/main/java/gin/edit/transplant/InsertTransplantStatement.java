@@ -11,8 +11,6 @@ import java.util.Random;
 
 public class InsertTransplantStatement extends StatementEdit implements TransplantEdit {
 
-    protected Random rng;
-
     protected SourceFile donorFile;
     protected int donorStatement;
 
@@ -20,7 +18,7 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
     protected int destinationBlock;
     protected int destinationStatement;
 
-    public InsertTransplantStatement(SourceFile sourceFile, Random rng) {
+    public InsertTransplantStatement(SourceFile sourceFile, SourceFile donorFile, Random rng) {
         SourceFileTree sf = (SourceFileTree)sourceFile;
         List<Integer> targetMethodBlocks = sf.getBlockIDsInTargetMethod();
         int insertBlock = targetMethodBlocks.get(rng.nextInt(targetMethodBlocks.size()));
@@ -32,16 +30,16 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
         this.destinationFilename = sourceFile.getFilename();
         this.destinationBlock = insertBlock;
         this.destinationStatement = insertStatementID;
-        //we need this later to get statement from donor file
-        this.rng = rng;
+
+        this.donorFile = donorFile;
+
+        SourceFileTree dsf = (SourceFileTree)donorFile;
+        donorStatement = dsf.getRandomStatementID(true, rng);
     }
 
     @Override
     public void setDonor(SourceFile file) {
         donorFile = file;
-
-        SourceFileTree sf = (SourceFileTree)file;
-        donorStatement = sf.getRandomStatementID(true, this.rng);
     }
 
     @Override
@@ -68,6 +66,6 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
 
     public static Edit fromString() {
         //TODO
-        return new InsertTransplantStatement(null, null);
+        return new InsertTransplantStatement(null, null, null);
     }
 }

@@ -46,6 +46,14 @@ public class Patch {
 
     public Patch(SourceFile sourceFile, SourceFile donorFile) {
         this.sourceFile = sourceFile;
+        this.donorFile = donorFile;
+        this.superClassOfEdits = null;
+        this.lastApplyWasValid = false;
+        this.editsValidOnLastApply = Collections.emptyList();
+    }
+
+    public Patch(SourceFile sourceFile) {
+        this.sourceFile = sourceFile;
         this.superClassOfEdits = null;
         this.lastApplyWasValid = false;
         this.editsValidOnLastApply = Collections.emptyList();
@@ -214,7 +222,12 @@ public class Patch {
         
         // make one
         try {
-                edit = editType.getDeclaredConstructor(SourceFile.class, Random.class).newInstance(sourceFile, rng);
+                if(editType.getPackage().getName().equals("gin.edit.transplant")) {
+                    edit = editType.getDeclaredConstructor(SourceFile.class, SourceFile.class, Random.class).newInstance(sourceFile, donorFile, rng);
+                }
+                else {
+                    edit = editType.getDeclaredConstructor(SourceFile.class, Random.class).newInstance(sourceFile, rng);
+                }
         } catch (NoSuchMethodException e) {
                 // we get here if the edit author forgot to add a (SourceFile,Random) constructor
                 // leave edit null, it'll be filled below.

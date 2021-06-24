@@ -53,7 +53,7 @@ public class LocalSearch {
     @Argument(alias = "t", description = "Test class name")
     protected String testClassName;
 
-    @Argument(alias = "ts", description = "Transplant source")
+    @Argument(alias = "ds", description = "Donation source")
     protected String donorClassName;
     
     @Argument(alias = "et", description = "Edit type: this can be a member of the EditType enum (LINE,STATEMENT,MATCHED_STATEMENT,MODIFY_STATEMENT); the fully qualified name of a class that extends gin.edit.Edit, or a comma separated list of both")
@@ -103,11 +103,12 @@ public class LocalSearch {
             this.donorClassName = this.className + "Donor";
         }
 
-        File file = new File(this.donorClassName);
-        System.out.println(this.donorClassName);
+        File file = new File(this.donorClassName + ".java");
+        System.out.println(this.donorClassName + ".java");
         if(file.exists() && !file.isDirectory() && file.canRead())
         {
-            this.donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.donorClassName, null);
+            System.out.println("Donor file found");
+            this.donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.donorClassName + ".java", null);
         }
 
         this.testRunner = new InternalTestRunner(className, classPath, testClassName, failFast);

@@ -12,14 +12,14 @@ import gin.edit.line.LineEdit;
 //import javax.swing.undo.StateEdit;
 
 public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdit {
-    SourceFile donorFile;
+    SourceFile donorSourceFile;
 
     public String sourceFile; 
     public int sourceLine;
     public String destinationFile;
     public int destinationLine;
 
-    public String donorSourceFile;
+    public String donorSourceFileName;
     public int donorLine;
 
     /** 
@@ -27,7 +27,7 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
      * @param sourceFile to create an edit for
      * @param rng random number generator, used to choose the donor line and the target line
      * */
-    public ReplaceWithTransplantLine(SourceFile sourceFile, Random rng) {
+    public ReplaceWithTransplantLine(SourceFile sourceFile, SourceFile donorFile, Random rng) {
         SourceFileLine sf = (SourceFileLine)sourceFile;
         List<Integer> allLines = sf.getLineIDsNonEmptyOrComments(false);
         List<Integer> targetMethodLines = sf.getLineIDsNonEmptyOrComments(true);
@@ -41,7 +41,8 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
         this.destinationFile = sourceFile.getFilename();
         this.destinationLine = targetMethodLines.get(rng.nextInt(targetMethodLines.size()));
 
-        this.donorSourceFile = donorFile. getFilename();
+        this.donorSourceFile = donorFile;
+        this.donorSourceFileName = donorFile.getFilename();
         this.donorLine = allLinesDonor.get(rng.nextInt(targetMethodLines.size()));
     }
     
@@ -59,7 +60,7 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
         // }
         
         SourceFileLine sf = (SourceFileLine)sourceFile;
-        SourceFileLine sd = (SourceFileLine)donorFile;
+        SourceFileLine sd = (SourceFileLine)donorSourceFile;
         //String lineSource = sf.getLine(sourceLine);
         String lineDonor = sd.getLine(donorLine);
         String lineDestination = sf.getLine(sourceLine);
@@ -92,12 +93,12 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
 
     @Override
     public void setDonor(SourceFile file) {
-        donorFile = file;
+        donorSourceFile = file;
     }
 
     @Override
     public SourceFile getDonor() {
-        return donorFile;
+        return donorSourceFile;
     }
 
 

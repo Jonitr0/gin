@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import gin.edit.transplant.InsertTransplantLine;
+import gin.edit.transplant.InsertTransplantStatement;
+import gin.edit.transplant.ReplaceWithTransplantLine;
+import gin.edit.transplant.ReplaceWithTransplantStatement;
 import org.pmw.tinylog.Logger;
 
 import gin.SourceFile;
@@ -39,7 +43,8 @@ import gin.edit.statement.SwapStatement;
  */
 public abstract class Edit {
 
-    public enum EditType { LINE, STATEMENT, MODIFY_STATEMENT, MATCHED_STATEMENT, INSERT_STATEMENT}
+    public enum EditType { LINE, STATEMENT, MODIFY_STATEMENT, MATCHED_STATEMENT, INSERT_STATEMENT,
+        TRANSPLANT_STATEMENT, TRANSPLANT_LINE}
 
     public abstract EditType getEditType();
 
@@ -63,7 +68,11 @@ public abstract class Edit {
                                 return Arrays.asList(MatchedDeleteStatement.class, MatchedCopyStatement.class, MatchedReplaceStatement.class, MatchedSwapStatement.class);
                     case MODIFY_STATEMENT:
                                 return Arrays.asList(BinaryOperatorReplacement.class, UnaryOperatorReplacement.class);
-                        default:
+                    case TRANSPLANT_LINE:
+                                return Arrays.asList(InsertTransplantLine.class, ReplaceWithTransplantLine.class);
+                    case TRANSPLANT_STATEMENT:
+                                return Arrays.asList(InsertTransplantStatement.class, ReplaceWithTransplantStatement.class);
+                    default:
                                 return Collections.emptyList();
             }
     }
