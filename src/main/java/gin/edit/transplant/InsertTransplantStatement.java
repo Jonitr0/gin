@@ -1,16 +1,47 @@
 package gin.edit.transplant;
 
+import com.github.javaparser.ast.stmt.Statement;
 import gin.SourceFile;
+import gin.SourceFileTree;
+import gin.edit.Edit;
 import gin.edit.statement.StatementEdit;
 
-import javax.swing.undo.StateEdit;
+import java.util.List;
+import java.util.Random;
 
 public class InsertTransplantStatement extends StatementEdit implements TransplantEdit {
-    SourceFile donorFile;
+
+    protected Random rng;
+
+    protected SourceFile donorFile;
+    protected int donorStatement;
+
+    protected String destinationFilename;
+    protected int destinationBlock;
+    protected int destinationStatement;
+
+    public InsertTransplantStatement(SourceFile sourceFile, Random rng) {
+        SourceFileTree sf = (SourceFileTree)sourceFile;
+        List<Integer> targetMethodBlocks = sf.getBlockIDsInTargetMethod();
+        int insertBlock = targetMethodBlocks.get(rng.nextInt(targetMethodBlocks.size()));
+        int insertStatementID = sf.getRandomInsertPointInBlock(insertBlock, rng);
+        if (insertStatementID < 0) {
+            insertStatementID = 0; // insert at start of empty block
+        }
+
+        this.destinationFilename = sourceFile.getFilename();
+        this.destinationBlock = insertBlock;
+        this.destinationStatement = insertStatementID;
+        //we need this later to get statement from donor file
+        this.rng = rng;
+    }
 
     @Override
     public void setDonor(SourceFile file) {
         donorFile = file;
+
+        SourceFileTree sf = (SourceFileTree)file;
+        donorStatement = sf.getRandomStatementID(true, this.rng);
     }
 
     @Override
@@ -20,6 +51,23 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
 
     @Override
     public SourceFile apply(SourceFile sourceFile) {
-        return null;
+        SourceFileTree sf = (SourceFileTree)sourceFile;
+
+        Statement statement = ((SourceFileTree)donorFile).getStatement(donorStatement);
+
+        sf.insertStatement(destinationBlock, destinationStatement, statement);
+
+        return sf;
+    }
+
+    @Override
+    public String toString() {
+        //TODO
+        return "";
+    }
+
+    public static Edit fromString() {
+        //TODO
+        return new InsertTransplantStatement(null, null);
     }
 }
