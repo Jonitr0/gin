@@ -103,12 +103,12 @@ public class LocalSearch {
             this.donorClassName = this.className + "Donor";
         }
 
-        File file = new File(this.donorClassName + ".java");
-        System.out.println(this.donorClassName + ".java");
+        File file = new File(this.donorClassName);
+        System.out.println("Looking for donor file named: " + this.donorClassName);
         if(file.exists() && !file.isDirectory() && file.canRead())
         {
             System.out.println("Donor file found");
-            this.donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.donorClassName + ".java", null);
+            this.donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, this.donorClassName, null);
         }
 
         this.testRunner = new InternalTestRunner(className, classPath, testClassName, failFast);
