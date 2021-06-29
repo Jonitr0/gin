@@ -72,11 +72,11 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
         return sf;
     }
 
-    // @Override
-    // public String toString() {
-    //     return this.getClass().getCanonicalName() + " \"" + sourceFile + "\":" + sourceLine + " -> \""
-    //             + destinationFile + "\":" + destinationLine;
-    // }
+    @Override
+    public String toString() {
+        return this.getClass().getCanonicalName() + " \"" + donorSourceFileName + "\":" + donorLine + " -> \""
+                + destinationFile + "\":" + destinationLine;
+    }
 
     // public static Edit fromString(String description) {
     //         String[] tokens = description.split("\\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);

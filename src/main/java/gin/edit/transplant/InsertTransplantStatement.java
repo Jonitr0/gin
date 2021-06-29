@@ -61,7 +61,7 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
     @Override
     public String toString() {
         //TODO
-        return "";
+        return this.getClass().getCanonicalName() + " \"" + donorFile.getFilename() + "\":" + donorStatement + " -> \"" + destinationFilename + "\":" + destinationStatement;
     }
 
     public static Edit fromString() {
