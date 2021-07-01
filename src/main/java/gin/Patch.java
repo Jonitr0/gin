@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import gin.edit.transplant.TransplantEdit;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
@@ -93,11 +92,6 @@ public class Patch {
         if ( (edit.getClass().toString()).equals(NoEdit.class.toString()) ) {
             // do not add an empty Edit
         } else {
-            //set donor file if the edit implements TransplantEdit interface
-            if(edit instanceof TransplantEdit)
-            {
-                ((TransplantEdit) edit).setDonor(this.donorFile);
-            }
 
             if ((superClassOfEdits == null) || superClassOfEdits.isAssignableFrom(edit.getClass())) {
                 this.edits.add(edit);

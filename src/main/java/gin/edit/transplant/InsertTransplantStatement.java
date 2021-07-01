@@ -9,7 +9,7 @@ import gin.edit.statement.StatementEdit;
 import java.util.List;
 import java.util.Random;
 
-public class InsertTransplantStatement extends StatementEdit implements TransplantEdit {
+public class InsertTransplantStatement extends StatementEdit {
 
     protected SourceFile donorFile;
     protected int donorStatement;
@@ -35,16 +35,6 @@ public class InsertTransplantStatement extends StatementEdit implements Transpla
 
         SourceFileTree dsf = (SourceFileTree)donorFile;
         donorStatement = dsf.getRandomStatementID(true, rng);
-    }
-
-    @Override
-    public void setDonor(SourceFile file) {
-        donorFile = file;
-    }
-
-    @Override
-    public SourceFile getDonor() {
-        return donorFile;
     }
 
     @Override

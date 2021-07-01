@@ -10,7 +10,7 @@ import gin.edit.line.LineEdit;
 import java.util.List;
 import java.util.Random;
 
-public class InsertTransplantLine extends LineEdit implements TransplantEdit {
+public class InsertTransplantLine extends LineEdit {
 
     SourceFile donorSourceFile;
 
@@ -46,17 +46,6 @@ public class InsertTransplantLine extends LineEdit implements TransplantEdit {
         this.sourceLine = donorLine;
         this.destinationFile = destinationFile;
         this.destinationLine = destinationLine;
-    }
-
-
-    @Override
-    public void setDonor(SourceFile file) {
-        donorSourceFile = file;
-    }
-
-    @Override
-    public SourceFile getDonor() {
-        return donorSourceFile;
     }
 
     @Override

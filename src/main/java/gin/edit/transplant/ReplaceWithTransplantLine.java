@@ -11,7 +11,7 @@ import gin.edit.line.LineEdit;
 
 //import javax.swing.undo.StateEdit;
 
-public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdit {
+public class ReplaceWithTransplantLine extends LineEdit {
     SourceFile donorSourceFile;
 
     public String sourceFile; 
@@ -90,16 +90,6 @@ public class ReplaceWithTransplantLine extends LineEdit implements TransplantEdi
     //     int destLine = Integer.parseInt(destTokens[1]);
     //     return new ReplaceLine(sourceFile, sourceLine, destFile, destLine);
     // }
-
-    @Override
-    public void setDonor(SourceFile file) {
-        donorSourceFile = file;
-    }
-
-    @Override
-    public SourceFile getDonor() {
-        return donorSourceFile;
-    }
 
 
 }
