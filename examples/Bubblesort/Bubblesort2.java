@@ -1,4 +1,4 @@
-private int[] liste = {5, 1, 4, 9, 0, 8, 6};
+ int[] liste = {5, 1, 4, 9, 0, 8, 6,2,3,6,7,,10,15,14,13};
 public int[] sortieren() {
     int a;
     for(int k = 1; k < liste.length; k++){
@@ -12,6 +12,7 @@ public int[] sortieren() {
     }
   return liste;
   }
+  /*
 public static void main(String[] args) {
     Bubble_Sort bs = new Bubble_Sort();
 int[] array = bs.sortieren();
@@ -19,4 +20,4 @@ for (int b = 0; b < array.length; b++) {
       System.out.println(b + 1 + „:“ + array[b]);
     }
   }
-}
+}*/

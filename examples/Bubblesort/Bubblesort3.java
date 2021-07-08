@@ -15,7 +15,7 @@ public class Bubblesort {
         }
         return intArr;
     }
-
+/*
     public static void main(String[] args) {
         Bubblesort bs = new Bubblesort();
         int[] arr = bs.sort();
@@ -23,4 +23,4 @@ public class Bubblesort {
             System.out.println(i + 1 + ": " + arr[i]);
         }
     }
-} 
+} */

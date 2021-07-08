@@ -21,7 +21,7 @@ private static void bubbleSort(int[] toSort) {
         array[indx_a] = array[indx_b];
         array[indx_b] = value_a;
     }
-
+/*
     public static void main(String[] args) {
         int[] unsorted = {4, 13, 1, 9, 9, 2, 7, 3};
 
@@ -31,4 +31,4 @@ private static void bubbleSort(int[] toSort) {
 
 
     }
-}
+}*/

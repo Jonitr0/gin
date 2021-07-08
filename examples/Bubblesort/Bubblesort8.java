@@ -12,6 +12,7 @@ public static int[] bubblesort(int[] zusortieren) {
 		}
 		return zusortieren;
 	}
+	/*
 public static void main(String[] args) {
 	
 		int[] unsortiert={1,5,8,2,7,4};
@@ -22,3 +23,4 @@ public static void main(String[] args) {
 		}
 	
 	}
+	*/
