@@ -13,12 +13,6 @@ public class Multiply {
         for(int i=0; i<b; ++i)
         {
             result += a;
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e)
-            {
-
-            }
         }
         return result;
     }
