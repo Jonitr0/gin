@@ -69,7 +69,7 @@ public abstract class Sampler {
 
     // Providing donor file
     @Argument(alias = "ds", description = "Donation source")
-    protected String donorClassName;
+    protected String donorClassName = null;
 
     @Argument(alias = "o", description = "Output CSV file")
     protected File outputFile = new File("sampler_results.csv");
