@@ -19,5 +19,5 @@ int[] array = bs.sortieren();
 for (int b = 0; b < array.length; b++) {
       System.out.println(b + 1 + „:“ + array[b]);
     }
-  }
-}*/
+  }*/
+}

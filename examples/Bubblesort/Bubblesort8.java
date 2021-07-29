@@ -20,7 +20,7 @@ public static void main(String[] args) {
 		
 		for (int i = 0; i<sortiert.length; i++) {
 			System.out.print(sortiert[i] + ", ");
-		}
+		}*/
 	
 	}
-	*/
+	

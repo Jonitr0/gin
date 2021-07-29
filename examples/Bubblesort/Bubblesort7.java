@@ -32,6 +32,6 @@ class BubbleSort
 		ob.bubbleSort(arr);
 		System.out.println("Sorted array");
 		ob.printArray(arr);
-	}
+	}*/
 }
 /* This code is contributed by Rajat Mishra */

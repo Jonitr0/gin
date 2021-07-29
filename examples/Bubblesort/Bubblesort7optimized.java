@@ -48,10 +48,10 @@ class GFG
 		bubbleSort(arr, n);
 		System.out.println("Sorted array: ");
 		printArray(arr, n);
-	}
+	}*/
 }
 
 
 // This code is contributed
 // by Nikita Tiwari.
-*/
+
