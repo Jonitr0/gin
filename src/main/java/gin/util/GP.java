@@ -93,8 +93,17 @@ public abstract class GP extends Sampler {
 
                 // Setup SourceFile for patching
                 SourceFile sourceFile = SourceFile.makeSourceFileForEditTypes(editTypes, method.getFileSource().getPath(), Collections.singletonList(method.getMethodName()));
+                System.out.println(sourceFile);
+                System.out.println(editTypes);
+                System.out.println(method.getFileSource().getPath());
+                System.out.println(Collections.singletonList(method.getMethodName()));
+                System.out.println(method.getClassName());
+                System.out.println(this.donorClassName);
 
-                search(method, new Patch(sourceFile));
+                donorClassName = method.getClassName() + "Donor";
+
+                SourceFile donorFile = SourceFile.makeSourceFileForEditTypes(editTypes, donorClassName, null);
+                search(method, new Patch(sourceFile, donorFile));
 
             }
         }
