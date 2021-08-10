@@ -44,7 +44,7 @@ import gin.edit.statement.SwapStatement;
 public abstract class Edit {
 
     public enum EditType { LINE, STATEMENT, MODIFY_STATEMENT, MATCHED_STATEMENT, INSERT_STATEMENT,
-        TRANSPLANT_STATEMENT, TRANSPLANT_LINE}
+        TRANSPLANT_STATEMENT, TRANSPLANT_LINE, COMBINED_TRANSPLANT_LINE}
 
     public abstract EditType getEditType();
 
