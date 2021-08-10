@@ -72,6 +72,8 @@ public abstract class Edit {
                                 return Arrays.asList(InsertTransplantLine.class, ReplaceWithTransplantLine.class);
                     case TRANSPLANT_STATEMENT:
                                 return Arrays.asList(InsertTransplantStatement.class, ReplaceWithTransplantStatement.class);
+                    case COMBINED_TRANSPLANT_LINE:
+                                return Arrays.asList(DeleteLine.class, CopyLine.class, ReplaceLine.class, SwapLine.class, ReplaceWithTransplantLine.class);
                     default:
                                 return Collections.emptyList();
             }
