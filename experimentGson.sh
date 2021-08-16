@@ -1,11 +1,11 @@
 #relative path to gson project directory
 pathToGson="../ssbseChallenge2019/gson"
 #individuals
-indCount=2 #21
+indCount=21
 #generations
-genCount=2 #10
+genCount=10
 #repetitions for test case runs
-repCount=10 #500
+repCount=200
 #donor file name
 donor="Donor.java"
 #maven home
